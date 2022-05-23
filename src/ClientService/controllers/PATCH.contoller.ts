@@ -57,7 +57,9 @@ class PatchController extends ExpressController {
             archived_finish: new Date().getTime() + 2592000000,
           },
         );
-        return client.id;
+        return {
+          data: `Usuario ${clientId} archivado`
+        }
       },
     });
   }

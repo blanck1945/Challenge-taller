@@ -20,6 +20,14 @@ const ClientsSchema = new mongoose.Schema<ClientInterface>(
       type: ClientState,
       default: ClientState.active
     },
+    archived_init: {
+      type: Number,
+      default: null
+    },
+    archived_finish: {
+      type: Number,
+      default: null
+    }
   },
   {
     collection: 'clients',

@@ -6,6 +6,7 @@ import { CarColors, CarProperties } from '../../CarsService/schemas/enums';
 import ExpressController from '../../CoreService/ExpressController/ExpressController';
 import { ControllerEnums, ValidationSchemas } from '../../CoreService/types/enums';
 import Cars from '../../CarsService/model/Car';
+import transaction from '../../docs/schemas/transaction';
 
 class PostController extends ExpressController {
   private functions = {
@@ -24,7 +25,7 @@ class PostController extends ExpressController {
       ValidationSchemas.CREATE_transactionSchema,
       mergeFields,
       this.controller,
-      this.functions.CREATE
+      this.functions.CREATE,
     );
 
     // Hay un error de validacion
@@ -75,7 +76,10 @@ class PostController extends ExpressController {
       name: this.functions.CREATE,
       function: async () => {
         const transaction = await Transactions.create(isValid);
-        return transaction;
+        return {
+          data: 'Transaccion creada con exito',
+          id: transaction.id,
+        };
       },
     });
   }

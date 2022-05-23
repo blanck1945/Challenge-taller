@@ -18,12 +18,12 @@ class PatchController extends ExpressController {
     const { transactionsId } = req.params;
     const { mergeFields } = req.body;
 
-    //
+    // Validacion general de la informacion.
     const { isValid, hasError } = await ValidationService.validateSchema(
       ValidationSchemas.UPDATE_CarSchema,
       mergeFields,
       this.controller,
-      this.functions.UPDATE
+      this.functions.UPDATE,
     );
 
     // Hay un error de validacion

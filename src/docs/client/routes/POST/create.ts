@@ -27,16 +27,10 @@ export default {
             'application/json': {
               schema: {
                 type: 'obj',
-                $ref: {
-                  state: 'boolean',
-                  lifecycle: 'string',
-                  data: 'string'
-                },
                 example: {
-                  state: true,
-                  lifecycle: "end-success",
-                  data: "6285bf24d6ebc94ea057618e"
-                }
+                  data: "Cliente creada con exito",
+                  id: '[Mongo Id]'
+                },
               },
             },
           },

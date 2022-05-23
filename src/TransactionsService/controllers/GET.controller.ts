@@ -9,7 +9,6 @@ class GetController extends ExpressController {
     CHECK: 'check',
     INDEX: 'index',
     SHOW: 'show',
-    PREVIEW: 'preview',
   };
 
   constructor() {

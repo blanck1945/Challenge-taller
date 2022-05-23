@@ -34,7 +34,10 @@ class PostController extends ExpressController {
       name: this.functions.CREATE,
       function: async () => {
         const client = await Clients.create(isValid);
-        return client.id;
+        return {
+          data: "Cliente creada con exito",
+          id: client.id
+        }
       },
     });
   }

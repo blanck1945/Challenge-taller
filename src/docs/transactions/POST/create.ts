@@ -15,7 +15,10 @@ export default {
           'application/json': {
             schema: {
               id: 'Mongo Id',
-              example: { id: '6285d090d65e863facb3c655' },
+              example: {
+                data: 'Auto creada con exito',
+                id: '[Mongo id]'
+              },
             },
           },
         },

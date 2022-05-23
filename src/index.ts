@@ -18,7 +18,6 @@ import TransactionsDeleteRoutes from './TransactionsService/routes/DELETE.routes
 
 import swaggerUi from 'swagger-ui-express' 
 import docs from './docs/index'
-const swaggerDocument = require('../swagger.json')
 
 const app = express();
 const port = 5000;

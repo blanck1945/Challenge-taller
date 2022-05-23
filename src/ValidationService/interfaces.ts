@@ -39,4 +39,3 @@ export interface FiltersResponse {
 
 export type Filters = CarFilterInterface | FiltersInterface;
 
-// () => Promise<CarInterface> | string,
