@@ -22,6 +22,8 @@ class PatchController extends ExpressController {
     const { isValid, hasError } = await ValidationService.validateSchema(
       ValidationSchemas.CREATE_clientsSchema,
       mergeFields,
+      this.controller,
+      this.functions.UPDATE
     );
 
     // Hay un error de validacion

@@ -22,6 +22,8 @@ class PostController extends ExpressController {
     const { isValid, hasError } = await ValidationService.validateSchema(
       ValidationSchemas.UPDATE_CarSchema,
       mergeFields,
+      this.controller,
+      this.functions.UPDATE
     );
 
     // Error en la validacion general

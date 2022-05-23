@@ -20,6 +20,8 @@ class PostController extends ExpressController {
     const { isValid, hasError } = await ValidationService.validateSchema(
       ValidationSchemas.CREATE_clientsSchema,
       mergeFields,
+      this.controller,
+      this.functions.CREATE
     );
 
     // Hay un error de validacion

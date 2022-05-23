@@ -22,6 +22,8 @@ class PatchController extends ExpressController {
     const { isValid, hasError } = await ValidationService.validateSchema(
       ValidationSchemas.UPDATE_CarSchema,
       mergeFields,
+      this.controller,
+      this.functions.UPDATE
     );
 
     // Hay un error de validacion
@@ -30,7 +32,6 @@ class PatchController extends ExpressController {
         ResponseService.errorResponse(hasError.internalCode, hasError.statusCode, hasError.message),
       );
 
-    console.warn({ isValid, transactionsId });
     this.expressWrapper(req, res, {
       name: this.functions.UPDATE,
       function: async () => {

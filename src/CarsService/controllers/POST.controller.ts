@@ -21,6 +21,8 @@ class PostController extends ExpressController {
     const { isValid, hasError } = await ValidationService.validateSchema(
       ValidationSchemas.CREATE_carsSchema,
       mergeField,
+      this.controller,
+      this.functions.CREATE
     );
 
     // Error en la validacion general
@@ -51,7 +53,6 @@ class PostController extends ExpressController {
       name: this.functions.CREATE,
       function: async () => {
         const car = await Cars.create(isValid);
-        console.warn({car})
         return car.id;
       },
     });

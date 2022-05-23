@@ -17,6 +17,7 @@ interface validResponse {
 
 class ValidationService {
   serviceTypeMsg = 'Servicios solo permiten numeros del 1 al 6';
+  opts = [OptEnum.strict, OptEnum.like];
 
   private clientsSchema = Yup.object({
     firstName: Yup.string().required().trim().lowercase(),
@@ -81,48 +82,32 @@ class ValidationService {
     return isNaN(query) ? 20 : query;
   }
 
-  getErrorMsg(err) {
-    if (err.includes('Illegal key')) return '';
-  }
-
   normalizeOptQuery = (querys, func: string) => {
-    try {
-      const sort = this.normalizeQuery(
-        CarArrayProperties,
-        querys.sort as string,
-        CarProperties.createdAt,
-      );
-      const order = this.normalizeQuery(['1', '-1'], querys.order as string, '1');
-      const limit = this.checkQueryType(parseInt(querys.limit));
+    const sort = this.normalizeQuery(
+      CarArrayProperties,
+      querys.sort as string,
+      CarProperties.createdAt,
+    );
+    const order = this.normalizeQuery(['1', '-1'], querys.order as string, '1');
+    const limit = this.checkQueryType(parseInt(querys.limit));
 
-      return {
-        sort,
-        order,
-        limit,
-        hasError: {
-          state: false,
-        },
-      };
-    } catch (err) {
-      console.warn({ msg: 'Este es un error' });
-      return {
-        hasError: {
-          state: true,
-          statusCode: 400,
-          internalCode: `normalizeOptQuery - ${func} - XXC32FS`,
-          message: this.getErrorMsg(err),
-        },
-      };
-    }
+    return {
+      sort,
+      order,
+      limit,
+      hasError: {
+        state: false,
+      },
+    };
   };
 
-  async validateSchema(schemaEnum, data): Promise<validResponse> {
+  async validateSchema(schemaEnum, data, controller: string, func: string): Promise<validResponse> {
     if (!data)
       return {
         isValid: {},
         hasError: {
           state: true,
-          internalCode: 'CC-UP-01',
+          internalCode: `${controller} - ${func} - XXCDD33`,
           statusCode: 400,
           message: 'No hay datos para actualizar',
         },
@@ -137,12 +122,11 @@ class ValidationService {
         },
       };
     } catch (err) {
-      console.warn({ err });
       return {
         isValid: {},
         hasError: {
           state: true,
-          internalCode: 'CC-UP-02',
+          internalCode: `${controller} - ${func} - X99DDX`,
           statusCode: 404,
           message: err.errors,
         },
@@ -196,7 +180,6 @@ class ValidationService {
         },
       };
     } catch (err) {
-      console.warn({ err });
       return err;
     }
   }
@@ -235,8 +218,6 @@ class ValidationService {
       },
     };
   }
-
-  opts = [OptEnum.strict, OptEnum.like];
 
   checkOptValue(opt: OptEnum) {
     return this.opts.includes(opt) ? opt : OptEnum.strict;
